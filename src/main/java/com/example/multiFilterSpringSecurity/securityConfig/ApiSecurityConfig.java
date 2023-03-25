@@ -1,24 +1,25 @@
 package com.example.multiFilterSpringSecurity.securityConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@Order(3)
-public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
+public class ApiSecurityConfig {
 
     @Autowired
     private DaoAuthenticationProvider apiAuthenticationProvider;
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/api/**")
-                .authenticationProvider(apiAuthenticationProvider)
+    @Bean
+    @Order(3)
+    public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.authenticationProvider(apiAuthenticationProvider)
+                .antMatcher("/api/**")
                 .authorizeRequests()
                 .anyRequest()
                 .hasRole("APIUSER")
@@ -29,5 +30,6 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable();
+        return http.build();
     }
 }
