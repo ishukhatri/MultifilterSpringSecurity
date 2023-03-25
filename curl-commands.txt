@@ -1,0 +1,13 @@
+#!/bin/bash
+Happy cases >
+# Test Client endpoint
+curl -u clientuser:{noop}client123 http://localhost:8081/api/transport/end-users/clients/test
+
+# Test Driver endpoint
+curl -u driveruser:{noop}driver123 http://localhost:8081/api/transport/end-users/drivers/test
+
+# Test API endpoint
+curl -u apiuser:{noop}apiuser123 http://localhost:8081/api/test
+
+# Test Web endpoint
+curl -u apiuser:apiuser123 http://localhost:8081/web/test
