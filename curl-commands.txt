@@ -14,3 +14,7 @@ curl -u apiuser:{noop}apiuser123 http://localhost:8081/web/test
 
 #public endpoint
 curl -u apiuser:{noop}apiuser123 http://localhost:8081/swagger-ui/docs
+
+
+curl --location 'localhost:8081/api/transport/end-users/drivers/test' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTY0MzY4MzE2NSwiZXhwIjoxNjQzNjgzNzY1fQ.valid_signature'
